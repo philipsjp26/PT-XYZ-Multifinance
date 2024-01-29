@@ -27,3 +27,10 @@ Build docker images
 ```shell
 docker build -t {image_name} -f deployment/Dockerfile .
 ```
+
+## System Architecture
+Its using hexagonal architecture as base structure
+
+![alt text ](https://github.com/philipsjp26/PT-XYZ-Multifinance/blob/master/diagram.png?raw=true)
+
+Example common architecture
