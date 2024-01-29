@@ -64,7 +64,15 @@ curl --location ':8000/api/v1/customer/transaction' \
     "interest_amount": 10000
 }'
 ```
-For handling concurrency on this service, we implement some method on endpoint `/api/v1/customer/transaction` :
+For handling concurrency on this service, we implement some method on endpoint `:8000/api/v1/customer/transaction/:contract_number` :
+
+```
+curl --location --request PUT ':8000/api/v1/customer/transaction/018d545a-f120-7d9b-816e-5f23eba70da2' \
+--header 'Content-Type: application/json' \
+--data '{
+    "admin_fee": 2000
+}'
+```
 - Optimistic Locking
 - Using mutex
 
