@@ -45,4 +45,23 @@ func (cust *createController) InitCustomerRoutes() {
 		return c.Status(fiber.StatusCreated).JSON(result)
 	})
 
+	api.Post("/transaction", func(c *fiber.Ctx) error {
+		req := new(request.CreateCustomerTransaction)
+		if err := c.BodyParser(req); err != nil {
+			return err
+		}
+		result := cust.customer.StoreTransaction(c.Context(), req)
+		return c.Status(fiber.StatusCreated).JSON(result)
+	})
+
+	api.Put("/transaction/:contract_number", func(c *fiber.Ctx) error {
+		contractNumber := c.Params("contract_number")
+		req := new(request.UpdateAdminFee)
+		if err := c.BodyParser(req); err != nil {
+			return err
+		}
+		result := cust.customer.UpdateAdminFee(c.Context(), req, contractNumber)
+		return c.Status(fiber.StatusOK).JSON(result)
+	})
+
 }

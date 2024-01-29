@@ -15,7 +15,7 @@ type database struct {
 }
 
 func parseUrl(c *config.Config) string {
-	return fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", c.Database.Username, c.Database.Password, c.Database.Host, c.Database.Port, c.Database.Name)
+	return fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", c.Database.Username, c.Database.Password, c.Database.Host, c.Database.Port, c.Database.Name)
 }
 
 func NewDatabase(c *config.Config) (repository.DBMySQL, error) {

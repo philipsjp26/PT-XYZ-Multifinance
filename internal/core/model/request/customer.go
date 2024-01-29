@@ -4,7 +4,25 @@ import (
 	"time"
 
 	"github.com/go-playground/validator/v10"
+	"github.com/google/uuid"
 )
+
+type UpdateAdminFee struct {
+	AdminFee float32 `json:"admin_fee" validate:"required"`
+}
+type CreateCustomerTransaction struct {
+	CustomerID        int     `json:"customer_id" validate:"required"`
+	Otr               float32 `json:"otr" validate:"required"`
+	AdminFee          float32 `json:"admin_fee" validate:"required"`
+	InstallmentAmount float32 `json:"installment_amount" validate:"required"`
+	InterestAmount    float32 `json:"interest_amount" validate:"required"`
+}
+
+type CreateCustomerLimitsRequest struct {
+	CustomerID  int     `json:"customer_id" validate:"required"`
+	Tenor       int     `json:"tenor" validate:"required"`
+	LimitAmount float32 `json:"limit_amount" validate:"required"`
+}
 
 type CreateCustomerRequest struct {
 	IdentityNumber string  `json:"identity_number" validate:"required"`
@@ -28,4 +46,12 @@ func (c CreateCustomerRequest) Validate() error {
 	}
 	return nil
 
+}
+
+func (c CreateCustomerTransaction) GenerateContractNumber() (string, error) {
+	id, err := uuid.NewV7()
+	if err != nil {
+		return "", err
+	}
+	return id.String(), nil
 }
