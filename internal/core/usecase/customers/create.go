@@ -2,6 +2,7 @@ package customers
 
 import (
 	"context"
+	"database/sql"
 	"go_playground/internal/core/entity"
 	"go_playground/internal/core/model/request"
 	"go_playground/internal/core/model/response"
@@ -36,9 +37,10 @@ func (c *customerUseCase) StoreCustomerLimits(ctx context.Context, req *request.
 }
 func (c *customerUseCase) Store(ctx context.Context, req *request.CreateCustomerRequest) *response.BaseResponse {
 	// if customer already exists
+
 	customer, err := c.repository.FindOne(ctx, "identity_number", req.IdentityNumber)
-	if err != nil {
-		log.Error(err)
+	if err != nil && err != sql.ErrNoRows {
+		log.Errorf("failed to find customer got :%v", err)
 		return response.NewErrorResponse(err.Error())
 	}
 	if customer != nil {
@@ -54,7 +56,7 @@ func (c *customerUseCase) Store(ctx context.Context, req *request.CreateCustomer
 		DateOfBirth:    req.DOB(),
 		Salary:         req.Salary,
 	}); err != nil {
-		log.Error(err)
+		log.Errorf("failed to store customer got :%v", err)
 		return response.NewErrorResponse(err.Error())
 	}
 

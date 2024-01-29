@@ -18,6 +18,10 @@ func NewCreateController(app *fiber.App, c service.CustomerService) *createContr
 }
 
 func (cust *createController) InitCustomerRoutes() {
+	cust.app.Use(func(c *fiber.Ctx) error {
+		c.Set("Content-Security-Policy", "default-src 'self'")
+		return c.Next()
+	})
 	api := cust.app.Group("/api/v1/customer")
 
 	api.Post("", func(c *fiber.Ctx) error {

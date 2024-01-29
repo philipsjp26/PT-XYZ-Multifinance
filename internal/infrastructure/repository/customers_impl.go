@@ -90,7 +90,7 @@ func (c *customersRepository) Store(ctx context.Context, customer entity.Custome
 		customer.DateOfBirth,
 		customer.Salary,
 	}
-	_, err := c.db.ExecContext(ctx, q, values...)
+	_, err := c.db.Exec(q, values...)
 	if err != nil {
 		return err
 	}
