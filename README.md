@@ -27,6 +27,46 @@ Build docker images
 ```shell
 docker build -t {image_name} -f deployment/Dockerfile .
 ```
+## REST API:
+`POST :8000/api/v1/customer`
+```curl --location ':8000/api/v1/customer' \
+--header 'Content-Type: application/json' \
+--data '{
+    "identity_number": "",
+    "full_name": "",
+    "legal_name": "",
+    "place_of_birth": "",
+    "date_of_birth": "",
+    "salary": 0
+}'
+```
+
+`POST :8000/api/v1/customer/limit`
+```
+curl --location ':8000/api/v1/customer/limit' \
+--header 'Content-Type: application/json' \
+--data '{
+    "customer_id": 1,
+    "tenor": 1,
+    "limit_amount": 1000000
+}'
+```
+
+`POST :8000/api/v1/customer/transaction`
+```
+curl --location ':8000/api/v1/customer/transaction' \
+--header 'Content-Type: application/json' \
+--data '{
+    "customer_id": 1,
+    "otr": 6000000,
+    "admin_fee": 25000,
+    "installment_amount": 650000,
+    "interest_amount": 10000
+}'
+```
+For handling concurrency on this service, we implement some method on endpoint `/api/v1/customer/transaction` :
+- Optimistic Locking
+- Using mutex
 
 ## System Architecture
 Its using hexagonal architecture as base structure
