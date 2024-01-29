@@ -64,7 +64,7 @@ curl --location ':8000/api/v1/customer/transaction' \
     "interest_amount": 10000
 }'
 ```
-For handling concurrency on this service, we implement some method on endpoint `:8000/api/v1/customer/transaction/:contract_number` :
+For handling concurrency on this service, we implement some method on endpoint `PUT :8000/api/v1/customer/transaction/:contract_number` :
 
 ```
 curl --location --request PUT ':8000/api/v1/customer/transaction/018d545a-f120-7d9b-816e-5f23eba70da2' \
