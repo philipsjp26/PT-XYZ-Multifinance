@@ -33,4 +33,12 @@ Its using hexagonal architecture as base structure
 
 ![alt text ](https://github.com/philipsjp26/PT-XYZ-Multifinance/blob/master/diagram.png?raw=true)
 
+<br />
+
 Example common architecture
+![alt text ](https://github.com/philipsjp26/PT-XYZ-Multifinance/blob/master/architecture.png?raw=true)
+
+<br />
+Database Diagram
+
+![alt text ](https://github.com/philipsjp26/PT-XYZ-Multifinance/blob/master/database.png?raw=true)
