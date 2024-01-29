@@ -10,3 +10,7 @@ install:
 clean:
 	@echo "Cleaning"
 	@rm -rf vendor
+
+build: 
+	@echo "building to binary . . ."
+	@go build -o binary

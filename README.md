@@ -22,3 +22,8 @@ __note__: __Please create database first !__
 ```shell
 go run main.go db:migrate up
 ```
+
+Build docker images
+```shell
+docker build -t {image_name} -f deployment/Dockerfile .
+```
