@@ -1,4 +1,4 @@
-package customerscontroller
+package http
 
 import (
 	"go_playground/internal/core/model/request"
@@ -18,8 +18,9 @@ func NewCreateController(app *fiber.App, c service.CustomerService) *createContr
 }
 
 func (cust *createController) InitCustomerRoutes() {
-	api := cust.app.Group("/api/v1/")
-	api.Post("customers", func(c *fiber.Ctx) error {
+	api := cust.app.Group("/api/v1/customer")
+
+	api.Post("", func(c *fiber.Ctx) error {
 		req := new(request.CreateCustomerRequest)
 		if err := c.BodyParser(req); err != nil {
 			return err
@@ -34,4 +35,14 @@ func (cust *createController) InitCustomerRoutes() {
 		result := cust.customer.Store(c.Context(), req)
 		return c.Status(fiber.StatusCreated).JSON(result)
 	})
+
+	api.Post("/limit", func(c *fiber.Ctx) error {
+		req := new(request.CreateCustomerLimitsRequest)
+		if err := c.BodyParser(req); err != nil {
+			return err
+		}
+		result := cust.customer.StoreCustomerLimits(c.Context(), req)
+		return c.Status(fiber.StatusCreated).JSON(result)
+	})
+
 }

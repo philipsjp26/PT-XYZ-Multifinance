@@ -2,7 +2,7 @@ package http
 
 import (
 	"go_playground/internal/controller/http"
-	httpCustomer "go_playground/internal/controller/http/customers_controller"
+
 	"go_playground/internal/core/server"
 	"go_playground/internal/core/usecase"
 	customerUcase "go_playground/internal/core/usecase/customers"
@@ -32,7 +32,7 @@ func Runner() {
 	routes := http.NewBaseController(server, livenessPort)
 	routes.InitRouter()
 
-	customerRoutes := httpCustomer.NewCreateController(server, customerServices)
+	customerRoutes := http.NewCreateController(server, customerServices)
 	customerRoutes.InitCustomerRoutes()
 
 	app.Start()
